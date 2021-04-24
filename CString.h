@@ -81,6 +81,27 @@ static void cstringInitStr(struct CString* const str, const char* const str2)
 }
 
 
+static void cstringUnit(struct CString* const str, const struct CString* const str2)
+{
+  if (str != NULL && str2 != NULL && str2->text != NULL)
+  {
+    char* newText = (char*) malloc(str->textSize + str2->textSize);
+
+    if (str->text != NULL)
+    {
+      strncpy(newText, str->text, str->textSize);
+      free(str->text);
+      str->text = NULL;
+    }
+
+    strncpy((newText + str->textSize), str2->text, str2->textSize);
+    str->text = newText;
+
+    str->textSize = str->textSize + str2->textSize;
+  }
+}
+
+
 static char* cstringData(const struct CString* const str)
 {
   return str->text;
