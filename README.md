@@ -1,1 +1,2 @@
 # CString
+String in C.
